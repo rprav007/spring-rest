@@ -5,7 +5,7 @@
 // Kubernetes Plugin 0.10
 ////
 
-String ocpApiServer = env.OCP_API_SERVER ? "${env.OCP_API_SERVER}" : "https://openshift.default.svc.cluster.local"
+String ocpApiServer = env.OCP_API_SERVER ? "${env.OCP_API_SERVER}" : "https://master.brooklyn-30e1.openshiftworkshop.com"
 
 node('master') {
 
