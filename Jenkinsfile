@@ -7,7 +7,7 @@
 
 String ocpApiServer = env.OCP_API_SERVER ? "${env.OCP_API_SERVER}" : "https://master.brooklyn-30e1.openshiftworkshop.com"
 
-node('master') {
+node('jenkins-slave-mvn') {
 
   env.NAMESPACE = readFile('/var/run/secrets/kubernetes.io/serviceaccount/namespace').trim()
   env.TOKEN = readFile('/var/run/secrets/kubernetes.io/serviceaccount/token').trim()
@@ -20,10 +20,6 @@ node('master') {
   env.STAGE3 = "${projectBase}-test"
   env.TARGET = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/target" : "target"
   env.nexusRepo = "nexus-labs-ci-cd.apps.brooklyn-30e1.openshiftworkshop.com"
-
-}
-
-node('jenkins-slave-mvn') {
 //  def mvnHome = "/usr/share/maven/"
 //  def mvnCmd = "${mvnHome}bin/mvn"
   def mvnCmd = 'mvn'
