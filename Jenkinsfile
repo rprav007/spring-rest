@@ -54,7 +54,7 @@ node('jenkins-slave-mvn') {
 
 
   stage('Build Image') {
-    	echo 'pwd'
+    sh "echo $(pwd)"
      sh "sleep 2m"
 
     	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
