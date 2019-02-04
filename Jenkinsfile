@@ -18,7 +18,7 @@ node('master') {
   env.STAGE1 = "${projectBase}-cicd"
   env.STAGE2 = "${projectBase}-dev"
   env.STAGE3 = "${projectBase}-test"
-  env.UBER_JAR_CONTEXT_DIR = "target/"
+  env.UBER_JAR_CONTEXT_DIR = "./target/"
 
 }
 
