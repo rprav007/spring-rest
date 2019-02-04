@@ -38,9 +38,9 @@ node('jenkins-slave-mvn') {
     sh "${mvnCmd} clean install -DskipTests=true -f ${pomFileLocation}"
 
   }
-  stage('Publish to Nexus') {
-    echo "Publish to Nexus"
-    sh "${mvnCmd} deploy -DskipTests -DaltDeploymentRepository=nexus::default::http://{env.nexusRepo}/repository/maven-releases/"
+  stage('wait') {
+    echo "waiting...."
+    sh "sleep 5m"
   }
   stage('Unit Test') {
 
@@ -59,13 +59,6 @@ node('jenkins-slave-mvn') {
 
 
     stage('Build Container Image') {
-        sh """
-          ls ${TARGET}/*
-          rm -rf oc-build && mkdir -p oc-build/deployments
-          for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
-            cp -rfv ./${TARGET}/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
-          done
-        """
     	sh "oc start-build ${env.APP_NAME} --from-dir=${env.TARGET} --follow"
     }
   stage("Verify Deployment to ${env.STAGE1}") {
