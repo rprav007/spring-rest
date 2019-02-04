@@ -51,11 +51,12 @@ node('jenkins-slave-mvn') {
   //def version    = getVersionFromPom("./pom.xml")
   //println("Artifact ID:" + artifactId + ", Group ID:" + groupId)
   //println("New version tag:" + version)
-stage ('wait_prior_starting_smoke_testing') {
-    sh "sleep 2m"
-}
+
 
   stage('Build Image') {
+    	echo 'pwd'
+     sh "sleep 2m"
+
     	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
 
   }
