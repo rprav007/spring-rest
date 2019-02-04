@@ -61,7 +61,7 @@ node('jenkins-slave-mvn') {
             cp -rfv ./${TARGET}/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
           done
         """
-        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "oc-build")
+    	sh "oc start-build ${env.APP_NAME} --from-dir=${env.TARGET} --follow"
     }
   stage("Verify Deployment to ${env.STAGE1}") {
 
@@ -71,6 +71,7 @@ node('jenkins-slave-mvn') {
   }
 
   stage("Promote To ${env.STAGE2}") {
+    
     sh """
     ${env.OC_CMD} tag ${env.STAGE1}/${env.APP_NAME}:latest ${env.STAGE2}/${env.APP_NAME}:latest
     """
