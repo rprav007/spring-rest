@@ -19,7 +19,7 @@ node('master') {
   env.STAGE2 = "${projectBase}-dev"
   env.STAGE3 = "${projectBase}-test"
   env.UBER_JAR_CONTEXT_DIR = "./target/"
- params.SLEEP_TIME_IN_SECONDS=200000
+ params.SLEEP_TIME_IN_SECONDS = 200000
 }
 
 node('jenkins-slave-mvn') {
@@ -52,7 +52,7 @@ node('jenkins-slave-mvn') {
   //def version    = getVersionFromPom("./pom.xml")
   //println("Artifact ID:" + artifactId + ", Group ID:" + groupId)
   //println("New version tag:" + version)
-stage ("wait_prior_starting_smoke_testing") {
+stage ('wait_prior_starting_smoke_testing') {
     def time = params.SLEEP_TIME_IN_SECONDS
     echo "Waiting ${SLEEP_TIME_IN_SECONDS} seconds for deployment to complete prior starting smoke testing"
     sleep time.toInteger() // seconds
