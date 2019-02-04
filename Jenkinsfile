@@ -18,7 +18,7 @@ node('jenkins-slave-mvn') {
   env.STAGE1 = "${projectBase}-cicd"
   env.STAGE2 = "${projectBase}-dev"
   env.STAGE3 = "${projectBase}-test"
-  env.TARGET = "${env.BUILD_CONTEXT_DIR}/target"
+  env.TARGET = "/target"
   env.nexusRepo = "nexus-labs-ci-cd.apps.brooklyn-30e1.openshiftworkshop.com"
 //  def mvnHome = "/usr/share/maven/"
 //  def mvnCmd = "${mvnHome}bin/mvn"
