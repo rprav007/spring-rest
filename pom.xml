@@ -13,7 +13,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <spring-boot.bom.version>1.5.8.Final-redhat-1</spring-boot.bom.version>
+        <spring-boot.bom.version>2.0.0.Alpha2</spring-boot.bom.version>
         <springboot.version>1.5.8.RELEASE</springboot.version>
         <springboot.metrics.version>0.5.1.RELEASE</springboot.metrics.version>
         <prometheus.client.version>0.1.0</prometheus.client.version>
