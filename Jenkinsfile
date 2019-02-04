@@ -19,7 +19,7 @@ node('master') {
   env.STAGE2 = "${projectBase}-dev"
   env.STAGE3 = "${projectBase}-test"
   env.TARGET = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/target" : "target"
-  env.nexusRepo = "nexus-labs-ci-cd.apps.brooklyn-30e1.openshiftworkshop.com "
+  env.nexusRepo = "nexus-labs-ci-cd.apps.brooklyn-30e1.openshiftworkshop.com"
 
 }
 
