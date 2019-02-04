@@ -54,7 +54,7 @@ node('jenkins-slave-mvn') {
 
 
     stage('Build Container Image') {
-    	sh "oc start-build ${env.APP_NAME} --from-dir=${env.TARGET} --follow"
+    	sh "oc start-build springrest --from-dir=target/--follow"
     }
   stage("Verify Deployment to ${env.STAGE1}") {
 
