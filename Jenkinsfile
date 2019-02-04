@@ -36,7 +36,6 @@ node('jenkins-slave-mvn') {
   }
   stage('wait') {
     echo "waiting...."
-    sh "sleep 5m"
   }
   stage('Unit Test') {
 
