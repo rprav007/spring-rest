@@ -54,7 +54,6 @@ node('jenkins-slave-mvn') {
 
 
     stage('Build Container Image') {
-      steps {
         sh """
           ls ${TARGET}/*
           rm -rf oc-build && mkdir -p oc-build/deployments
@@ -63,7 +62,6 @@ node('jenkins-slave-mvn') {
           done
         """
         binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "oc-build")
-      }
     }
   stage("Verify Deployment to ${env.STAGE1}") {
 
