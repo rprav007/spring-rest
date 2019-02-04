@@ -18,7 +18,7 @@ node('jenkins-slave-mvn') {
   env.STAGE1 = "${projectBase}-cicd"
   env.STAGE2 = "${projectBase}-dev"
   env.STAGE3 = "${projectBase}-test"
-  env.TARGET = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/target" : "target"
+  env.TARGET = "${env.BUILD_CONTEXT_DIR}/target"
   env.nexusRepo = "nexus-labs-ci-cd.apps.brooklyn-30e1.openshiftworkshop.com"
 //  def mvnHome = "/usr/share/maven/"
 //  def mvnCmd = "${mvnHome}bin/mvn"
@@ -54,7 +54,7 @@ node('jenkins-slave-mvn') {
 
 
     stage('Build Container Image') {
-    	sh "oc start-build springrest --from-dir=target/--follow"
+      sh "oc start-build springrest --from-dir=${env.TARGET} --follow"
     }
   stage("Verify Deployment to ${env.STAGE1}") {
 
