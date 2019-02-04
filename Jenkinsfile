@@ -40,7 +40,7 @@ node('jenkins-slave-mvn') {
   }
   stage('Publish to Nexus') {
     echo "Publish to Nexus"
-    sh "${mvnCmd} deploy -DskipTests -DaltDeploymentRepository=nexus::default::http://${env.nexusRepo}/repository/releases"
+    sh "${mvnCmd} deploy -DskipTests -DaltDeploymentRepository=nexus::default::http://${env.nexusRepo}/repository/maven-releases"
   }
   stage('Unit Test') {
 
