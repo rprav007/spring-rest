@@ -15,13 +15,11 @@ node('jenkins-slave-mvn') {
 
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?pipeline-?/, '').replaceAll(/-?${env.NAMESPACE}-?/, '')
   def projectBase = "${env.NAMESPACE}".replaceAll(/-dev/, '')
-  env.STAGE1 = "${projectBase}-cicd"
-  env.STAGE2 = "${projectBase}-dev"
-  env.STAGE3 = "${projectBase}-test"
+  env.STAGE1 = "labs-ci-cd"
+  env.STAGE2 = "labs-dev"
+  env.STAGE3 = "labs-test"
   env.TARGET = "./target"
   env.nexusRepo = "nexus-labs-ci-cd.apps.brooklyn-30e1.openshiftworkshop.com"
-//  def mvnHome = "/usr/share/maven/"
-//  def mvnCmd = "${mvnHome}bin/mvn"
   def mvnCmd = 'mvn'
   String pomFileLocation = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
 
