@@ -15,13 +15,13 @@ node('master') {
 
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?pipeline-?/, '').replaceAll(/-?${env.NAMESPACE}-?/, '')
   def projectBase = "${env.NAMESPACE}".replaceAll(/-dev/, '')
-  env.STAGE1 = "${projectBase}-dev"
-  env.STAGE2 = "${projectBase}-stage"
-  env.STAGE3 = "${projectBase}-prod"
+  env.STAGE1 = "${projectBase}-cicd"
+  env.STAGE2 = "${projectBase}-dev"
+  env.STAGE3 = "${projectBase}-test"
 
 }
 
-node('maven') {
+node('jenkins-slave-mvn') {
 //  def mvnHome = "/usr/share/maven/"
 //  def mvnCmd = "${mvnHome}bin/mvn"
   def mvnCmd = 'mvn'
