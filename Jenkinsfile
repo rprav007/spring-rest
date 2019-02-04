@@ -18,7 +18,7 @@ node('master') {
   env.STAGE1 = "${projectBase}-cicd"
   env.STAGE2 = "${projectBase}-dev"
   env.STAGE3 = "${projectBase}-test"
-  env.UBER_JAR_CONTEXT_DIR = "./target/"
+  env.TARGET = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/target" : "target"
 }
 
 node('jenkins-slave-mvn') {
@@ -53,13 +53,18 @@ node('jenkins-slave-mvn') {
   //println("New version tag:" + version)
 
 
-  stage('Build Image') {
-    sh "echo $PWD"
-     sh "sleep 2m"
-
-    	sh "oc start-build ${env.APP_NAME} --from-dir=${env.UBER_JAR_CONTEXT_DIR} --follow"
-
-  }
+    stage('Build Container Image') {
+      steps {
+        sh """
+          ls ${TARGET}/*
+          rm -rf oc-build && mkdir -p oc-build/deployments
+          for t in \$(echo "jar;war;ear" | tr ";" "\\n"); do
+            cp -rfv ./${TARGET}/*.\$t oc-build/deployments/ 2> /dev/null || echo "No \$t files"
+          done
+        """
+        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "oc-build")
+      }
+    }
   stage("Verify Deployment to ${env.STAGE1}") {
 
     openshiftVerifyDeployment(deploymentConfig: "${env.APP_NAME}", namespace: "${STAGE1}", verifyReplicaCount: true)
