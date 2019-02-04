@@ -19,6 +19,8 @@ node('master') {
   env.STAGE2 = "${projectBase}-dev"
   env.STAGE3 = "${projectBase}-test"
   env.TARGET = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/target" : "target"
+  env.nexusRepo = "nexus-labs-ci-cd.apps.brooklyn-30e1.openshiftworkshop.com "
+
 }
 
 node('jenkins-slave-mvn') {
@@ -36,7 +38,10 @@ node('jenkins-slave-mvn') {
     sh "${mvnCmd} clean install -DskipTests=true -f ${pomFileLocation}"
 
   }
-
+  stage('Publish to Nexus') {
+    echo "Publish to Nexus"
+    sh "${mvnCmd} deploy -DskipTests -DaltDeploymentRepository=nexus::default::http://${env.nexusRepo}/repository/releases"
+  }
   stage('Unit Test') {
 
      sh "${mvnCmd} test -f ${pomFileLocation}"
