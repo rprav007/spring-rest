@@ -22,6 +22,8 @@
 		<swagger-core-version>1.5.10</swagger-core-version>
 		<jaxb.version>2.3.0</jaxb.version>
 		<springboot.mongo.version>2.0.5.RELEASE</springboot.mongo.version>
+		    <fabric8.version>3.0.11.fuse-000039-redhat-1</fabric8.version>
+    <fabric8.maven.plugin.version>3.5.33.fuse-000067-redhat-1</fabric8.maven.plugin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -120,6 +122,19 @@
 					<execution>
 						<goals>
 							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>fabric8-maven-plugin</artifactId>
+				<version>${fabric8.maven.plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>resource</goal>
+							<goal>build</goal>
 						</goals>
 					</execution>
 				</executions>
